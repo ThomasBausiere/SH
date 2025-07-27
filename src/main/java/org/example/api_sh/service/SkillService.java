@@ -16,10 +16,16 @@ public class SkillService {
         this.skillRepository = skillRepository;
     }
 
-    //CREATE SKILL
+    //CREATE 1 SKILL
 
     public Skill createSkill(Skill skill) {
         return skillRepository.save(skill);
+    }
+
+    //CREATE MANY SKILLS FROM A JSON
+
+    public List<Skill> createSkills(List<Skill> skills) {
+        return skillRepository.saveAll(skills);
     }
 
     //READ BY ID
@@ -50,4 +56,9 @@ public class SkillService {
     public void deleteSkill(Integer id) {
         skillRepository.deleteById(id);
     }
+
+    //FIND BY
+
+    //NAME
+    public List<Skill> findBy(String search) { return skillRepository.searchSkillsByKeyword(search);}
 }

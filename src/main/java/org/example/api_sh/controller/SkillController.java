@@ -16,10 +16,17 @@ public class SkillController {
     }
 
 
-    // CREATE
+    // CREATE 1
     @PostMapping
     public Skill save(@RequestBody Skill skill) {
         return skillService.createSkill(skill);
+    }
+
+    //CREATE MANY
+
+    @PostMapping("/bulk")
+    public List<Skill> saveAll(@RequestBody List<Skill> skills) {
+        return skillService.createSkills(skills);
     }
 
     //READ 1
@@ -48,6 +55,12 @@ public class SkillController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         skillService.deleteSkill(id);
+    }
+
+    //SEARCH
+    @GetMapping("/search")
+    public List<Skill> search(@RequestParam String q) {
+        return skillService.findBy(q);
     }
 
 

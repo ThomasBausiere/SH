@@ -1,5 +1,8 @@
 package org.example.api_sh.entity.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import org.example.api_sh.util.SmartEnumConverter;
+
 public enum Attribute {
     // Warrior
     STRENGTH,
@@ -61,5 +64,13 @@ public enum Attribute {
     LEADERSHIP,
     COMMAND,
     MOTIVATION,
-    SPEAR_MASTERY
+    SPEAR_MASTERY,
+    //None
+    NO_ATTRIBUTE;
+
+
+    @JsonCreator
+    public static Attribute fromJson(String value) {
+        return SmartEnumConverter.smartMatch(Attribute.class, value);
+    }
 }
