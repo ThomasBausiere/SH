@@ -1,0 +1,17 @@
+:host {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  max-width: 80%;
+  min-width: 50%;
+  background-color: #cfd8dc;
+  border-radius: 8px;
+  padding: 10px;
+
+  justify-self: center;
+  background: rgba(255, 255, 255, 0.08); /* léger voile blanc translucide */
+  border-radius: 16px;
+  backdrop-filter: blur(12px); /* flou de l’arrière-plan */
+  -webkit-backdrop-filter: blur(12px); /* compatibilité Safari */
+  border: 1px solid rgba(255, 255, 255, 0.18); /* léger contour */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); /* ombre douce */
+}

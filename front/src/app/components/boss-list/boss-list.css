@@ -1,0 +1,123 @@
+:host {
+  /* était: overflow: auto;  -> ça clippe la modale */
+  overflow: visible;            /* laisse l’overlay dépasser du composant */
+}
+/* ——— Carte liste (léger) ——— */
+.boss-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .5rem .75rem;
+  border-radius: .5rem;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+}
+.boss-name { margin: 0; }
+.btn { 
+  padding: .55rem 1rem; border: 0; border-radius: .5rem; cursor: pointer;
+  background: #ffd166; color: #fff; font-weight: 600;
+}
+.btn:hover { filter: brightness(1.05); }
+.btn--ghost { background: rgba(255,255,255,.08); color: #fff; }
+
+/* ——— Overlay plein écran ——— */
+.modal-overlay {
+  position: fixed; inset: 0;
+  z-index: 2147483646; /* au-dessus de tout */
+  display: grid; place-items: center;
+  background: rgba(0,0,0,.65);
+  backdrop-filter: blur(2px);
+}
+
+/* ——— Dialog ——— */
+.boss-modal {
+  position: relative;
+  margin: 0; padding: 0;
+  width: min(100vw - 2rem, 980px);
+  max-height: calc(100vh - 2rem);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 18px;
+  background: rgba(24,24,24,.78);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  box-shadow: 0 30px 90px rgba(0,0,0,.6);
+}
+
+/* fallback si l’overlay n’est pas là (navigateurs gérant ::backdrop) */
+.boss-modal::backdrop {
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(2px);
+}
+
+/* ——— Close (coin haut droit) ——— */
+.modal-close {
+  position: absolute; top: .5rem; right: .5rem;
+  width: 2.25rem; height: 2.25rem; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.08); color: #fff;
+  font-size: 1.25rem; line-height: 1;
+}
+.modal-close:hover { background: rgba(255,255,255,.12); }
+
+/* ——— Corps en grille 2 colonnes ——— */
+.modal-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  min-height: clamp(380px, 70vh, 680px);
+}
+
+/* ——— Media gauche ——— */
+.modal-media {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: auto; /* pour scroller si image > conteneur */
+}
+
+.modal-media img {
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+  width: auto;
+  object-fit: contain; /* garde le ratio */
+  display: block;
+}
+
+/* ——— Détails droite ——— */
+.modal-details {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 1rem;
+  padding: 2rem;
+  color: #fff;
+}
+.modal-title {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.2vw, 2rem);
+  color: #ffd166;
+}
+.meta { margin: 0; display: grid; gap: .25rem; }
+.meta > div { display: grid; grid-template-columns: 10ch 1fr; gap: .75rem; }
+.meta dt { opacity: .8; font-weight: 600; }
+.meta dd { margin: 0; }
+
+.boss-description { margin: .25rem 0 0; line-height: 1.6; opacity: .95; }
+.modal-actions { display: flex; justify-content: flex-end; height: 40px; gap: .75rem; }
+
+/* ——— Responsive ——— */
+@media (max-width: 900px) {
+  .modal-body { grid-template-columns: 1fr; }
+  .modal-media { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .modal-details { padding: 1.25rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .boss-modal { transform: translateY(8px) scale(.98); opacity: 0; animation: modal-in .22s ease-out both; }
+  @keyframes modal-in {
+    to { transform: translateY(0) scale(1); opacity: 1; }
+  }
+}

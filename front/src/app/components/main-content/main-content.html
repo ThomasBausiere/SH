@@ -1,0 +1,10 @@
+<app-search-bar (search)="handleSearch($event)" />
+<app-skills-list
+  [skillsList]="skillsList"
+  (showBossEvent)="handleData($event)"
+/>
+
+<!-- Conteneur pour la vue dynamique à droite -->
+
+<app-skills-details />
+<app-boss-list [bossList]="bossList" />

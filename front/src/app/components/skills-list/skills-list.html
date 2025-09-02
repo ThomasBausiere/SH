@@ -1,0 +1,44 @@
+<section class="table-wrap">
+  <table class="skills-table" role="table" aria-label="Liste des compétences">
+    <colgroup>
+      <col class="col-skill" />
+      <col class="col-profession" />
+      <col class="col-attr" />
+      <col class="col-campaign" />
+      <col class="col-boss" />
+      <col class="col-add" />
+    </colgroup>
+
+    <thead>
+      <tr>
+        <th scope="col" class="th-skill">Skill</th>
+        <th scope="col" class="th-profession">Profession</th>
+        <th scope="col">Attribute</th>
+        <th scope="col">Campaign</th>
+        <th scope="col">Boss</th>
+        <th scope="col" class="col-add">Add</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (s of skillsList; track s) {
+        <tr>
+          <td class="skill-name" title="{{ s.name }}">{{ s.name }}</td>
+          <td class="profession" title="{{ s.profession }}">{{ s.profession }}</td>
+          <td title="{{ s.attribute }}">{{ s.attribute }}</td>
+          <td>{{ s.campaign }}</td>
+          <td>
+            <button type="button" class="btn btn--ghost" (click)="listsBoss(s.id)">
+              locations
+            </button>
+          </td>
+          <td class="col-add">
+            <button type="button" class="btn" (click)="addToMyList(s)">
+              Add
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>

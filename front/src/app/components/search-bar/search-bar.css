@@ -1,0 +1,104 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;                 /* pas d’espace autour */
+  background: transparent;    /* on enlève le glass morphism */
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+}
+/* ===== Compact search bar ===== */
+.search{
+  --sb-h: 42px;          /* << change this to 38–46px to tune height */
+  --gold: #d8a84a;
+}
+
+.search form{
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  height: var(--sb-h);
+  padding: 0 .6rem 0 .8rem;               /* no vertical padding */
+  border: 1.5px solid var(--gold);
+  border-radius: 999px;
+  background: rgba(0,0,0,.45);
+}
+
+/* Magnifier icon (left) — scaled to bar height */
+.search form::before{
+  content: "";
+  flex: 0 0 calc(var(--sb-h) * .48);
+  width: calc(var(--sb-h) * .48);
+  height: calc(var(--sb-h) * .48);
+  margin-right: .25rem;
+  background: var(--gold);
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>") center/contain no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>") center/contain no-repeat;
+}
+
+/* Input */
+.search input[type="text"]{
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #f7f3e8;
+  font-size: .95rem;                     /* smaller text */
+  line-height: 1;                        /* no extra height */
+  height: calc(var(--sb-h) - 2px);       /* visually centered */
+}
+.search input::placeholder{
+  color: rgba(247,243,232,.7);
+  font-weight: 600;
+  letter-spacing: .01em;
+}
+
+/* Focus ring on the whole pill */
+.search form:has(input:focus){
+  box-shadow: 0 0 0 2px rgba(216,168,74,.22);
+}
+
+/* Right "Filter" chip (visual only) */
+.search button[type="submit"]{
+  position: relative;
+  margin-left: auto;
+  padding: .15rem .6rem;                 /* tighter */
+  height: calc(var(--sb-h) - 12px);
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--gold);
+  border-radius: 999px;
+  background: rgba(0,0,0,.35);
+  color: transparent;                    /* hide “Search” */
+  line-height: 1;
+  cursor: default;
+  pointer-events: none;                  /* visual only */
+}
+
+/* Sliders icon + Filter label */
+.search button[type="submit"]::before{
+  content: "";
+  width: calc(var(--sb-h) * .4);
+  height: calc(var(--sb-h) * .4);
+  margin-right: .4rem;
+  background: var(--gold);
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><line x1='4' y1='21' x2='14' y2='21'/><line x1='10' y1='17' x2='10' y2='21'/><line x1='20' y1='3' x2='10' y2='3'/><line x1='14' y1='3' x2='14' y2='7'/><line x1='4' y1='11' x2='20' y2='11'/><line x1='8' y1='11' x2='8' y2='15'/></svg>") center/contain no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><line x1='4' y1='21' x2='14' y2='21'/><line x1='10' y1='17' x2='10' y2='21'/><line x1='20' y1='3' x2='10' y2='3'/><line x1='14' y1='3' x2='14' y2='7'/><line x1='4' y1='11' x2='20' y2='11'/><line x1='8' y1='11' x2='8' y2='15'/></svg>") center/contain no-repeat;
+}
+.search button[type="submit"]::after{
+  content: "Filter";
+  color: var(--gold);
+  font-weight: 700;
+  font-size: .95rem;
+}
+
+/* Even slimmer on very small screens */
+@media (max-width: 520px){
+  .search{ --sb-h: 38px; }
+  .search input[type="text"]{ font-size: .93rem; }
+  .search button[type="submit"]::after{ font-size: .9rem; }
+}

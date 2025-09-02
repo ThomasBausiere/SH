@@ -1,0 +1,31 @@
+:host {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 20px;
+  height: 100%;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.08); /* léger voile blanc translucide */
+  border-radius: 16px;
+  backdrop-filter: blur(12px); /* flou de l’arrière-plan */
+  -webkit-backdrop-filter: blur(12px); /* compatibilité Safari */
+  border: 1px solid rgba(255, 255, 255, 0.18); /* léger contour */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); /* ombre douce */
+}
+
+app-search-bar {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+app-skills-list {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+.details-container {
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+  display: flex;
+  flex-direction: column;
+}

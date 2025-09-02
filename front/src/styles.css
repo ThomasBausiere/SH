@@ -1,0 +1,21 @@
+*, ::before, ::after{
+  box-sizing: border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+   height:100vh;
+   width:100%;
+   background-color:bisque;
+}
+
+
+.morphisme {
+  background: rgba(255, 255, 255, 0.08); /* léger voile blanc translucide */
+  border-radius: 16px;
+  backdrop-filter: blur(12px); /* flou de l’arrière-plan */
+  -webkit-backdrop-filter: blur(12px); /* compatibilité Safari */
+  border: 1px solid rgba(255, 255, 255, 0.18); /* léger contour */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); /* ombre douce */
+}
