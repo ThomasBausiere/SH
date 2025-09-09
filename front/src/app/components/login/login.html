@@ -1,0 +1,25 @@
+
+<div class="morphisme" id="loginPage">
+
+  <section>
+    <h2 class="title">Login</h2>
+    <form [formGroup]="form" (ngSubmit)="loginUser()" class="form">
+      <div>
+        <label for="email">Email</label>
+        <input id="email" type="text" formControlName="email">
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password">
+      </div>
+      <button class="btn">Login</button>
+    </form>
+  </section>
+
+      <p class="meta">
+      new member? Sign up ! 
+      <a routerLink="/register">Sign up</a>
+    </p>
+
+
+</div>

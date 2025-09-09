@@ -3,9 +3,9 @@ import { BossList } from '../boss-list/boss-list';
 import { SearchBar } from '../search-bar/search-bar';
 import { SkillsList } from '../skills-list/skills-list';
 import { SkillsDetails } from '../skills-details/skills-details';
-import { ApiService } from '../../utils/services/api-service';
 import { SkillType } from '../../utils/types/skill-type';
 import { BossType } from '../../utils/types/boss-type';
+import { ApiServicePublic } from '../../utils/services/api-service-public';
 
 @Component({
   selector: 'app-main-content',
@@ -18,10 +18,10 @@ export class MainContent implements OnInit, OnDestroy {
 
   skillsList: SkillType[] = [];
   bossList: BossType[] = [];
-  idSkill: number = 6;
+  idSkill: number = 1;
   receiveData!: string;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiServicePublic) {}
 
   ngOnInit(): void {
     // Fetch des skills au démarrage
