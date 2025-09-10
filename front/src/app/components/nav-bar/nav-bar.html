@@ -1,4 +1,13 @@
-<a routerLink="/">Home</a>
-<a routerLink="/login">Login</a>
+<nav>
+    <a routerLink="/">Home</a>
+    
+    @if(token){
+        <button (click)="logout()"> Log Out </button>
+    }@else {
+
+        <a routerLink="/login">Login</a>
+        <a routerLink="/register">register</a>
+    }
+</nav>
 
 

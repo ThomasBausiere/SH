@@ -5,6 +5,7 @@ import { catchError, Observable, of, tap } from 'rxjs';
 import { BossType } from '../types/boss-type';
 import { UserPublic, UserRegister } from '../types/user-public';
 import { isPlatformBrowser } from '@angular/common';
+import { Token } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
@@ -79,5 +80,16 @@ export class ApiServicePublic {
 
   isAuthenticated(): boolean {
     return !!this.getToken();
+  }
+
+    logout(): void {
+    if (typeof window !== 'undefined' && window.localStorage ) {
+
+      localStorage.removeItem('token');
+      console.log('token removed');
+      localStorage.removeItem('userId');
+      console.log('userId removed');
+      
+    }
   }
 }
