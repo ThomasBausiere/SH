@@ -15,8 +15,8 @@
         <th scope="col" class="th-profession">Profession</th>
         <th scope="col">Attribute</th>
         <th scope="col">Campaign</th>
-        <th scope="col">Boss</th> 
-
+        <th scope="col">Boss</th>
+        <th scope="col">Add</th>
       </tr>
     </thead>
 
@@ -38,16 +38,17 @@
             locations
           </button>
         </td>
-        <!-- TODO if logged @{  -->
-        
         <td class="col-add">
-          <button type="button" class="btn" (click)="addToMyList(s)">
-            Add
-          </button>
+          <input
+            type="checkbox"
+            [checked]="hasSkill(s.id)"
+            (change)="onToggleSkill(s, $event)"
+            [disabled]="!token || !selectedToonId || loadingSkillIds.has(s.id)"
+            aria-label="ADD/REMOVE"
+          />
         </td>
-        
       </tr>
-      }
+        }
     </tbody>
   </table>
 </section>

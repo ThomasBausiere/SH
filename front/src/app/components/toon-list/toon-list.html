@@ -1,0 +1,40 @@
+<section class="toon-list">
+  <header class="header">
+    <h2>My Toons</h2>
+    <a routerLink="/newToon" class="new-link">+ Create new toon</a>
+  </header>
+
+  @if (loading) {
+    <div>loading...</div>
+  }
+  @else if (error) {
+    <div class="error">{{ error }}</div>
+  }
+  @else {
+    @if (toons.length > 0) {
+      <ul class="list">
+        @for (t of toons; track t.id) {
+          <li
+            class="item"
+            (click)="onSelectToon(t)"
+            tabindex="0"
+            (keyup.enter)="onSelectToon(t)"
+            role="button"
+            aria-label="Sélectionner le toon "
+          >
+            <div class="name">{{ t.name }}</div>
+            <div class="meta">
+              <span class="profession">{{ t.profession }}</span>
+            </div>
+          </li>
+        }
+      </ul>
+    }
+    @else {
+      <p class="empty">
+        Aucun toon pour le moment.
+        <a routerLink="/newToon">Créer le premier</a>.
+      </p>
+    }
+  }
+</section>

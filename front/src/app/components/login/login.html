@@ -1,25 +1,24 @@
+<div class="auth-shell">
+  <div class="glass">
+    <form [formGroup]="form" (ngSubmit)="loginUser()" class="auth-card">
+      <h1>Login</h1>
 
-<div class="morphisme" id="loginPage">
-
-  <section>
-    <h2 class="title">Login</h2>
-    <form [formGroup]="form" (ngSubmit)="loginUser()" class="form">
-      <div>
+      <div class="field">
         <label for="email">Email</label>
-        <input id="email" type="text" formControlName="email">
+        <input id="email" type="text" formControlName="email" />
       </div>
-      <div>
+
+      <div class="field">
         <label for="password">Password</label>
-        <input id="password" type="password" formControlName="password">
+        <input id="password" type="password" formControlName="password" />
       </div>
-      <button class="btn">Login</button>
-    </form>
-  </section>
+
+      <button class="primary" type="submit">Login</button>
 
       <p class="meta">
-      new member? Sign up ! 
-      <a routerLink="/register">Sign up</a>
-    </p>
-
-
+        new member? Sign up !
+        <a routerLink="/register">Sign up</a>
+      </p>
+    </form>
+  </div>
 </div>

@@ -1,64 +1,35 @@
-<div class="morphisme">
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="card">
-    <h1>Sign up</h1>
+<div class="auth-shell">
+  <div class="glass">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="auth-card">
+      <h1>Sign up</h1>
 
-    <!-- Email -->
-    <div class="field">
-      <label for="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        formControlName="email"
-        placeholder="Enter your email"
-        required
-      />
-      @if (registerForm.get('email')?.hasError('required') &&
-            registerForm.get('email')?.touched) {
-        <p class="error">champ obligatoire</p>
-      }
-    </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" placeholder="Enter your email" required />
+        @if (registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched) {
+          <p class="error">champ obligatoire</p>
+        }
+      </div>
 
-    <!-- First Name -->
-    <div class="field">
-      <label for="pseudo">Pseudo</label>
-      <input
-        type="text"
-        id="pseudo"
-        formControlName="pseudo"
-        placeholder="Enter your pseudo"
-        required
-      />
-      @if (registerForm.get('pseudo')?.hasError('required') &&
-            registerForm.get('pseudo')?.touched) {
-        <p class="error">champ obligatoire</p>
-      }
-    </div>
+      <div class="field">
+        <label for="pseudo">Pseudo</label>
+        <input id="pseudo" type="text" formControlName="pseudo" placeholder="Enter your pseudo" required />
+        @if (registerForm.get('pseudo')?.hasError('required') && registerForm.get('pseudo')?.touched) {
+          <p class="error">champ obligatoire</p>
+        }
+      </div>
 
-   
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password" placeholder="Enter your password" required />
+      </div>
 
-    <!-- Password -->
-    <div class="field">
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        formControlName="password"
-        placeholder="Enter your password"
-        required
-      />
-    </div>
+      <button type="submit" class="primary" [disabled]="registerForm.invalid">Confirm</button>
 
-   
-
-    <!-- Confirm Button -->
-    <button type="submit" class="primary" [disabled]="registerForm.invalid">
-      Confirm
-    </button>
-
-    <!-- Redirect -->
-    <p class="meta">
-      Already have an account ?
-      <a routerLink="/login">Sign in</a>
-    </p>
-  </form>
+      <p class="meta">
+        Already have an account ?
+        <a routerLink="/login">Sign in</a>
+      </p>
+    </form>
+  </div>
 </div>

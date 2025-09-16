@@ -1,13 +1,14 @@
-<nav>
-    <a routerLink="/">Home</a>
-    
-    @if(token){
-        <button (click)="logout()"> Log Out </button>
-    }@else {
+<nav class="top-nav">
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
 
-        <a routerLink="/login">Login</a>
-        <a routerLink="/register">register</a>
-    }
+
+    <a routerLink="/showToons" routerLinkActive="active">Toons</a>
+ 
+
+  @if (token) {
+    <button (click)="logout()">Log Out</button>
+  } @else {
+    <a routerLink="/login" routerLinkActive="active">Login</a>
+    <a routerLink="/register" routerLinkActive="active">Register</a>
+  }
 </nav>
-
-

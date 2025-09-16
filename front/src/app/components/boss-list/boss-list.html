@@ -10,7 +10,7 @@
           aria-haspopup="dialog"
           aria-controls="boss-modal"
         >
-          Voir les détails
+          Show
         </button>
       </article>
     }
@@ -63,7 +63,7 @@
 
 
               <div class="modal-actions">
-                <button type="button" class="btn" (click)="closeModal()">Fermer</button>
+                <button type="button" class="btn" (click)="closeModal()">Close</button>
               </div>
             </section>
           </div>
@@ -71,6 +71,6 @@
       </div>
     }
   } @else {
-    <p>Aucun boss pour cette compétence.</p>
+    <p>No Boss found.</p>
   }
 </section>

@@ -39,9 +39,12 @@ export class ApiServicePublic {
     );
   }
 
-  login(credentials: Pick<UserRegister, 'email' | 'password'>): Observable<{ token: string; userId: number }> {
-    localStorage.clear();
-    return this.http  
+  login(
+    credentials: Pick<UserRegister, 'email' | 'password'>
+  ): Observable<{ token: string; userId: number }> {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    return this.http
       .post<{ token: string; userId: number }>(
         this.baseUrl + '/login',
         credentials
@@ -57,8 +60,6 @@ export class ApiServicePublic {
         })
       );
   }
-
-  
 
   getToken(): string | null {
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -82,13 +83,11 @@ export class ApiServicePublic {
     return !!this.getToken();
   }
 
-    logout(): void {
-    if (typeof window !== 'undefined' && window.localStorage ) {
-
+  logout(): void {
+    if (typeof window !== 'undefined' && window.localStorage) {
       localStorage.removeItem('token');
-      console.log('token removed');
+      
       localStorage.removeItem('userId');
-      console.log('userId removed');
       
     }
   }

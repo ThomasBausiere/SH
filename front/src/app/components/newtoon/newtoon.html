@@ -1,0 +1,47 @@
+<section class="new-toon">
+  <header class="header">
+    <h2>New Toon</h2>
+    <a routerLink="/" class="back-link">← Back</a>
+  </header>
+
+  @if (error) {
+  <div class="error">{{ error }}</div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="field">
+      <label for="name">Name</label>
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        [attr.aria-invalid]="f['name'].invalid && (f['name'].touched || f['name'].dirty)"
+        placeholder="Ex: Aegis"
+      />
+      @if (f['name'].errors && (f['name'].touched || f['name'].dirty)) {
+      <small class="hint">
+        @if (f['name'].errors['required']) { Name Required. } @if
+        (f['name'].errors['maxlength']) { the name can't excede 60 caracters. }
+      </small>
+      }
+    </div>
+
+    <div class="field">
+      <label for="profession">Profession</label>
+      <select id="profession" formControlName="profession">
+        <option value="" disabled selected>-- Select --</option>
+        @for (p of professions; track p) {
+        <option [value]="p">{{ p }}</option>
+        }
+      </select>
+      @if (f['profession'].errors && (f['profession'].touched ||
+      f['profession'].dirty)) {
+      <small class="hint">Profession required.</small>
+      }
+    </div>
+
+    <button type="submit" [disabled]="submitting || form.invalid">
+      @if (!submitting) { Create } @else { Creation }
+    </button>
+  </form>
+</section>

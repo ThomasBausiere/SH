@@ -2,14 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BossList } from '../boss-list/boss-list';
 import { SearchBar } from '../search-bar/search-bar';
 import { SkillsList } from '../skills-list/skills-list';
-import { SkillsDetails } from '../skills-details/skills-details';
 import { SkillType } from '../../utils/types/skill-type';
 import { BossType } from '../../utils/types/boss-type';
 import { ApiServicePublic } from '../../utils/services/api-service-public';
+import { ToonDetails } from "../toon-details/toon-details";
 
 @Component({
   selector: 'app-main-content',
-  imports: [BossList, SearchBar, SkillsList, SkillsDetails],
+  imports: [BossList, SearchBar, SkillsList, ToonDetails],
   templateUrl: './main-content.html',
   styleUrls: ['./main-content.css'],
 })

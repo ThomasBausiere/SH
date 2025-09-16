@@ -56,7 +56,7 @@ export class Login {
     this.apiService.login(user).subscribe((res) => {
       console.log('Response', res);
       console.log('Logged!');
-      this.router.navigate(['/']);
+      this.router.navigate(['/showToons']);
     });
   }
 }

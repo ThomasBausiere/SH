@@ -1,20 +1,20 @@
 // auth-interceptor.ts
 import { HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const doc = inject(DOCUMENT);
-  const ls = doc?.defaultView?.localStorage; 
-
-
   const isPublic = req.url.includes('/api/public/');
   const isPreflight = req.method === 'OPTIONS';
   if (isPublic || isPreflight) return next(req);
 
-  const token = ls?.getItem('token') ?? null; 
+  const token = (typeof localStorage !== 'undefined')
+    ? localStorage.getItem('token')
+    : null;
+
   if (token) {
+    console.debug('[authInterceptor] Attaching Authorization header');
     req = req.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
-  }
+  }else {
+  console.debug('[authInterceptor] No token found');
+}
   return next(req);
 };
