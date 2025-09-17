@@ -50,5 +50,13 @@ export class ApiServiceProtected {
   removeSkillToon(id: number, skillId: number): Observable<ToonType> {
     return this.http.delete<ToonType>(`${this.baseUrl}/toons/${id}/skills/${skillId}`);
   }
+
+  updateUser(id: number, payload: { email: string; pseudo: string }) {
+  return this.http.post(`/api/private/user/${id}`, payload);
+}
+
+updatePassword(id: number, payload: { password: string }) {
+  return this.http.post(`/api/private/user/${id}/updatepass`, payload);
+}
   
 }

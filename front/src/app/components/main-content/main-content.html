@@ -1,10 +1,15 @@
-<app-search-bar (search)="handleSearch($event)" />
-<app-skills-list
-  [skillsList]="skillsList"
-  (showBossEvent)="handleData($event)"
+<app-search-bar
+  [professionOptions]="professionOptions"
+  [campaignOptions]="campaignOptions"
+  (search)="handleSearch($event)"
+  (filtersChange)="handleFiltersChange($event)"
 />
 
-<!-- Conteneur pour la vue dynamique à droite -->
+<app-skills-list
+  [skillsList]="displayedSkills"
+  (showBossEvent)="handleData($event)"
+   (ownershipChange)="onOwnershipChange($event)"
+/>
 
 <app-toon-details />
 <app-boss-list [bossList]="bossList" />

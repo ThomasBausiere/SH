@@ -1,6 +1,75 @@
+<!-- ton form existant -->
 <div class="search">
   <form (ngSubmit)="searchSkill()">
     <input type="text" [formControl]="search_control" placeholder="search..." />
-    <button type="submit">Search</button>
+
+    <button type="button"
+            class="filter-chip"
+            (click)="toggleFilters()"
+            [attr.aria-expanded]="open">
+      Filter
+    </button>
   </form>
+
+  <!-- DROPDOWN -->
+ @if (open) {
+    <div class="filter-panel" role="menu" aria-label="Filters">
+      <div class="filter-row">
+        <h4>Professions</h4>
+        <div class="options">
+          @for (p of professionOptions; track p) {
+            <label class="opt">
+              <input type="checkbox"
+                     [checked]="selectedProfessions.has(p)"
+                     (change)="toggleProfession(p)" />
+              <span>{{ p }}</span>
+            </label>
+          }
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <h4>Campaign</h4>
+        <div class="options">
+          @for (c of campaignOptions; track c) {
+            <label class="opt">
+              <input type="checkbox"
+                     [checked]="selectedCampaigns.has(c)"
+                     (change)="toggleCampaign(c)" />
+              <span>{{ c }}</span>
+            </label>
+          }
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <h4>Ownership</h4>
+        <div class="options">
+          <label class="opt">
+            <input type="radio" name="owned"
+                   [checked]="ownedMode === 'all'"
+                   (change)="setOwnedMode('all')" />
+            <span>All</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="owned"
+                   [checked]="ownedMode === 'ownedOnly'"
+                   (change)="setOwnedMode('ownedOnly')" />
+            <span>Owned only</span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="owned"
+                   [checked]="ownedMode === 'hideOwned'"
+                   (change)="setOwnedMode('hideOwned')" />
+            <span>Hide owned</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" (click)="clearFilters()">Clear</button>
+        <button type="button" (click)="open=false">Close</button>
+      </div>
+    </div>
+  }
 </div>

@@ -1,10 +1,10 @@
 @if (loading) {
-  <p>loading</p>
+  <p>loading…</p>
 }
-@else if (error) {
-  <p class="error">{{ error }}</p>
+@else if (!toon) {
+  <p>Visitor</p>
 }
-@else if (toon) {
+@else {
   <p>{{ toon.name }}</p>
-  <p>{{toon.skills.length}}/ 300</p>
+  <p>{{ ownedCount }} / {{ TOTAL }}</p>
 }

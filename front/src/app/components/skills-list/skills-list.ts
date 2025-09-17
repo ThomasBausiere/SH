@@ -21,6 +21,7 @@ import { ToonType } from '../../utils/types/toon-type';
 export class SkillsList implements OnInit {
   @Input() skillsList!: SkillType[];
   @Output() showBossEvent = new EventEmitter<number>();
+  @Output() ownershipChange = new EventEmitter<{ skillId: number; owned: boolean }>();
 
   apipublic = inject(ApiServicePublic);
   apiProtected = inject(ApiServiceProtected);
@@ -103,47 +104,42 @@ private loadToonSkills(toonId: number) {
   }
 
   /** ADD */
-  private addSkillToToon(skillId: number, finalize: () => void): void {
-    if (!this.selectedToonId) {
-      finalize();
-      return;
-    }
+private addSkillToToon(skillId: number, finalize: () => void): void {
+    if (!this.selectedToonId) { finalize(); return; }
 
-    // Optimistic update (facultatif) : on coche tout de suite
-    this.ownedSkillIds.add(skillId);
+    this.ownedSkillIds.add(skillId); // optimistic
 
     this.apiProtected.addSkillToon(this.selectedToonId, skillId).subscribe({
-      next: () => finalize(),
+      next: () => {
+        // informe le parent -> il pourra appliquer les filtres (hideOwned / ownedOnly)
+        this.ownershipChange.emit({ skillId, owned: true });            // 👈 NEW
+        finalize();
+      },
       error: (err) => {
         console.error('Ajout skill échoué', err);
-        // rollback si erreur
-        this.ownedSkillIds.delete(skillId);
+        this.ownedSkillIds.delete(skillId); // rollback
         finalize();
       },
     });
   }
 
-  /** REMOVE */
   private removeSkillFromToon(skillId: number, finalize: () => void): void {
-    if (!this.selectedToonId) {
-      finalize();
-      return;
-    }
+    if (!this.selectedToonId) { finalize(); return; }
 
-    // Optimistic update
-    const had = this.ownedSkillIds.delete(skillId);
+    const had = this.ownedSkillIds.delete(skillId); // optimistic
 
     this.apiProtected.removeSkillToon(this.selectedToonId, skillId).subscribe({
-      next: () => finalize(),
+      next: () => {
+        this.ownershipChange.emit({ skillId, owned: false });            
+        finalize();
+      },
       error: (err) => {
         console.error('Suppression skill échouée', err);
-        // rollback si erreur
-        if (had) this.ownedSkillIds.add(skillId);
+        if (had) this.ownedSkillIds.add(skillId); // rollback
         finalize();
       },
     });
   }
-
   listsBoss(id: number): void {
     this.showBossEvent.emit(id);
     console.log(id);

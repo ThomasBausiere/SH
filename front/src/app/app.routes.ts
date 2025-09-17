@@ -11,5 +11,5 @@ export const routes: Routes = [
     {path:"login", component:Login},
     {path:"register", component:Register},
     {path:"newToon", component:Newtoon},
-    {path:"showToons", component:ToonList}
+    {path:"showToons", component:ToonList},
 ];
