@@ -7,6 +7,8 @@ import { ToonList } from './components/toon-list/toon-list';
 
 import { isLoggedGuard } from './utils/guards/is-logged-guard';
 import { loginRedirect } from './utils/guards/loginRedirect';
+import { isAdminGuard } from './utils/guards/is-admin.guard';
+import { AdminPanel } from './components/admin-panel/admin-panel';
 
 export const routes: Routes = [
     {path:"", component:MainContent},
@@ -14,6 +16,6 @@ export const routes: Routes = [
     {path:"register", component:Register,canActivate: [loginRedirect]},
     {path:"newToon", component:Newtoon, canActivate: [isLoggedGuard]},
     {path:"showToons", component:ToonList, canActivate: [isLoggedGuard]},
-
+    { path: 'admin', component: AdminPanel, canActivate: [isLoggedGuard, isAdminGuard] },
     { path: '**', redirectTo: '' },
 ];

@@ -4,6 +4,10 @@
 
     <a routerLink="/showToons" routerLinkActive="active">Toons</a>
 
+@if (isLogged && isAdmin) {
+  <a routerLink="/admin" class="nav-link">Admin</a>
+}   
+ 
 
   @if (token) {
     <button (click)="logout()">Log Out</button>

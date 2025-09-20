@@ -9,6 +9,8 @@ import { ToonCreateRequest, ToonRenameRequest, ToonType } from '../types/toon-ty
 })
 export class ApiServiceProtected {
   private baseUrl = "http://localhost:8080/api/private";
+  private baseUrlPublic = "http://localhost:8080/api/public";
+  private baseUrlAdmin ="http://localhost:8080/api/admin"
 
   constructor(private http: HttpClient){}
 
@@ -58,5 +60,38 @@ export class ApiServiceProtected {
 updatePassword(id: number, payload: { password: string }) {
   return this.http.post(`/api/private/user/${id}/updatepass`, payload);
 }
+
+listUsers() {
+  return this.http.get<any[]>(this.baseUrlAdmin + '/users');
+}
+listBosses() {
+  return this.http.get<any[]>(this.baseUrlPublic + '/bosses'); 
+}
+listAllToons() {
+  return this.http.get<any[]>(this.baseUrlAdmin + '/toons');  
+}
+me() {
+  return this.http.get<{ id:number; email:string; pseudo:string; role:'USER'|'ADMIN' }>(
+    this.baseUrl + '/me'
+  );
+}
+
+createSkill(body: { name: string }) {
+    return this.http.post<any>(`${this.baseUrlPublic}/skills`, body);
+  }
+
+  updateSkill(id: number, body: { name: string }) {
+    return this.http.put<any>(`${this.baseUrlPublic}/skills/${id}`, { id, ...body });
+  }
+
+  // ===== Boss (public controller côté back) =====
+  createBoss(body: { name: string }) {
+    return this.http.post<any>(`${this.baseUrlPublic}/bosses`, body);
+  }
+
+  updateBoss(id: number, body: { name: string }) {
+    return this.http.put<any>(`${this.baseUrlPublic}/bosses/${id}`, { id, ...body });
+  }
+
   
 }

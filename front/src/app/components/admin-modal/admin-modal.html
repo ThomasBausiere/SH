@@ -1,0 +1,18 @@
+@if(open){
+    <div class="modal-backdrop" (click)="backdropClose ? close.emit() : null"></div>
+    <div class="modal">
+      <header class="modal__header">
+        <h3>{{ title }}</h3>
+        <button type="button" class="icon-btn" (click)="close.emit()" aria-label="Close">×</button>
+      </header>
+      <section class="modal__body">
+        <ng-content></ng-content>
+      </section>
+      @if(showFooter){
+        <footer class="modal__footer">
+          <button type="button" class="btn" (click)="close.emit()">Close</button>
+          <button type="button" class="btn btn--primary" (click)="confirm.emit()">Confirm</button>
+        </footer>
+      }
+    </div>
+  }

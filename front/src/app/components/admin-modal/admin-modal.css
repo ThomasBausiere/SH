@@ -1,0 +1,109 @@
+/* ===== Backdrop plein écran ===== */
+.modal-backdrop{
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  background: rgba(0,0,0,.65);
+  backdrop-filter: blur(2px);
+}
+
+/* ===== Modale (carte verre) ===== */
+.modal{
+  position: fixed;
+  z-index: 2147483647;              /* au-dessus du backdrop */
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(920px, 92vw);
+  max-height: 86vh;
+
+  display: grid;
+  grid-template-rows: auto minmax(0,1fr) auto; /* header / body scroll / footer */
+  gap: .75rem;
+
+  padding: 1rem;
+  border-radius: 20px;
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(216,168,74,.18), transparent 55%),
+    rgba(0,0,0,.80);
+  border: 1px solid rgba(216,168,74,.25);
+  box-shadow: 0 30px 90px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.05);
+  color: #fff;
+
+  /* petite anim d’apparition */
+  opacity: 0; transform-origin: 50% 40%;
+  animation: modal-in .18s ease-out forwards;
+}
+@keyframes modal-in { to { opacity: 1; transform: translate(-50%,-50%) scale(1); } }
+
+/* ===== Header ===== */
+.modal__header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .25rem .25rem .5rem;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.modal__header h3{
+  margin: 0;
+  font-size: 1.15rem;
+  color: #ffd166;
+  letter-spacing: .02em;
+}
+
+/* bouton X */
+.icon-btn{
+  appearance: none;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  width: 2rem; height: 2rem;
+  border-radius: 999px;
+  line-height: 1;
+  cursor: pointer;
+}
+.icon-btn:hover{ background: rgba(255,255,255,.12); }
+
+/* ===== Corps scrollable ===== */
+.modal__body{
+  min-height: 0;                 /* pour que overflow fonctionne en grid */
+  overflow: auto;
+  padding: .25rem;
+}
+
+/* ===== Footer ===== */
+.modal__footer{
+  display: flex;
+  justify-content: flex-end;
+  gap: .5rem;
+  padding-top: .5rem;
+  border-top: 1px solid rgba(255,255,255,.12);
+}
+
+/* ===== Boutons (cohérents avec le site) ===== */
+.btn{
+  border: 1px solid rgba(216,168,74,.55);
+  background: rgba(0,0,0,.35);
+  color: #d8a84a;
+  border-radius: 10px;
+  padding: .4rem .75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn:hover{ filter: brightness(1.05); }
+
+.btn--primary{
+  border-color: rgba(216,168,74,.75);
+  background: linear-gradient(180deg, #d8a84a, #b3832e);
+  color: #1a1205;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 520px){
+  .modal{
+    width: 94vw;
+    padding: .75rem;
+    border-radius: 16px;
+  }
+  .icon-btn{ width: 1.8rem; height: 1.8rem; }
+}

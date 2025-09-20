@@ -1,0 +1,150 @@
+<section class="admin">
+  <h1>ADMIN PANEL</h1>
+
+  <nav class="tabs">
+    <button [class.active]="tab() === 'users'"  (click)="setTab('users')">Users</button>
+    <button [class.active]="tab() === 'skills'" (click)="setTab('skills')">Skills</button>
+    <button [class.active]="tab() === 'boss'"   (click)="setTab('boss')">Boss</button>
+    <button [class.active]="tab() === 'toons'"  (click)="setTab('toons')">Toon</button>
+  </nav>
+
+  @if (loading()) {
+    <p>Loading…</p>
+  } @else if (error()) {
+    <p class="error">{{ error() }}</p>
+  } @else {
+
+    @if (tab() === 'users') {
+      <table class="adm-table">
+        <thead><tr><th>ID</th><th>Pseudo</th><th>Email</th><th>Actions</th></tr></thead>
+        <tbody>
+          @for (u of users; track u.id) {
+            <tr>
+              <td>{{u.id}}</td>
+              <td>{{u.pseudo}}</td>
+              <td>{{u.email}}</td>
+              <td class="actions">
+                <button (click)="onView(u,'users')">Show</button>
+                <button (click)="onEdit(u,'users')">Update</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+
+    @if (tab() === 'skills') {
+      <table class="adm-table">
+        <thead><tr><th>ID</th><th>Name</th><th>Actions</th></tr></thead>
+        <tbody>
+          @for (s of skills; track s.id) {
+            <tr>
+              <td>{{s.id}}</td>
+              <td>{{s.name}}</td>
+              <td class="actions">
+                <button (click)="onView(s,'skills')">Show</button>
+                <button (click)="onEdit(s,'skills')">Update</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+      <div class="footer-actions">
+        <button (click)="onCreate('skills')">Add</button>
+      </div>
+    }
+
+    @if (tab() === 'boss') {
+      <table class="adm-table">
+        <thead><tr><th>ID</th><th>Name</th><th>Actions</th></tr></thead>
+        <tbody>
+          @for (b of bosses; track b.id) {
+            <tr>
+              <td>{{b.id}}</td>
+              <td>{{b.name}}</td>
+              <td class="actions">
+                <button (click)="onView(b,'boss')">Show</button>
+                <button (click)="onEdit(b,'boss')">Update</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+      <div class="footer-actions">
+        <button (click)="onCreate('boss')">Add</button>
+      </div>
+    }
+
+    @if (tab() === 'toons') {
+      <table class="adm-table">
+        <thead><tr><th>ID</th><th>Name</th><th>Actions</th></tr></thead>
+        <tbody>
+          @for (t of toons; track t.id) {
+            <tr>
+              <td>{{t.id}}</td>
+              <td>{{t.name}}</td>
+              <td class="actions">
+                <button (click)="onView(t,'toons')">Show</button>
+                <button (click)="onEdit(t,'toons')">Update</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+      <div class="footer-actions">
+        <button (click)="onCreate('toons')">Add</button>
+      </div>
+    }
+  }
+
+  <!-- SHOW -->
+  <app-admin-modal
+    [open]="showViewModal()"
+    [title]="'Details – ' + modalType"
+    (close)="closeModals()">
+    @if (modalEntity) {
+      <pre>{{ modalEntity | json }}</pre>
+    }
+  </app-admin-modal>
+
+  <!-- EDIT -->
+  <app-admin-modal
+    [open]="showEditModal()"
+    [title]="'Edit – ' + modalType"
+    [showFooter]="true"
+    (close)="closeModals()"
+    (confirm)="confirmEdit()">
+
+    @if (modalType === 'users') {
+      <form [formGroup]="editForm" class="form-grid">
+        <label>Email <input type="email" formControlName="email" /></label>
+        <label>Pseudo <input type="text" formControlName="pseudo" /></label>
+      </form>
+    } @else if (modalType === 'skills' || modalType === 'boss' || modalType === 'toons') {
+      <form [formGroup]="editForm" class="form-grid">
+        <label>Name <input type="text" formControlName="name" /></label>
+      </form>
+    }
+  </app-admin-modal>
+
+  <!-- CREATE -->
+  <app-admin-modal
+    [open]="showCreateModal()"
+    [title]="'Create – ' + modalType"
+    [showFooter]="true"
+    (close)="closeModals()"
+    (confirm)="confirmCreate()">
+
+    @if (modalType === 'skills' || modalType === 'boss') {
+      <form [formGroup]="createForm" class="form-grid">
+        <label>Name <input type="text" formControlName="name" /></label>
+      </form>
+    } @else if (modalType === 'toons') {
+      <form [formGroup]="createForm" class="form-grid">
+        <label>User ID <input type="number" formControlName="userId" /></label>
+        <label>Name <input type="text" formControlName="name" /></label>
+        <label>Profession <input type="text" formControlName="profession" /></label>
+      </form>
+    }
+  </app-admin-modal>
+</section>

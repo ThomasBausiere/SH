@@ -1,0 +1,141 @@
+/* ===== Cadre glass centré ===== */
+.admin{
+  width: min(800px, 94vw);
+  margin: 6vh auto;
+  padding: 1.5rem 1.75rem;
+  border-radius: 24px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(216,168,74,.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 25px 70px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04);
+  color: #fff;
+  display: grid;
+  gap: 1rem;
+}
+
+.admin > h1{
+  margin: 0;
+  text-align: center;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  letter-spacing: .12em;
+  color: #ffd166;
+}
+
+/* ===== Onglets ===== */
+.tabs{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  justify-content: center;
+}
+.tabs > button{
+  appearance: none;
+  border: 1px solid rgba(216,168,74,.55);
+  background: rgba(0,0,0,.35);
+  color: #d8a84a;
+  border-radius: 999px;
+  padding: .35rem .85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.tabs > button:hover{ filter: brightness(1.05); }
+.tabs > button.active{
+  background: linear-gradient(180deg, #d8a84a, #b3832e);
+  color: #1a1205;
+  border-color: rgba(216,168,74,.75);
+}
+
+/* ===== Table admin ===== */
+.adm-table{
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(0,0,0,.60);
+}
+.adm-table thead th{
+  position: sticky; top: 0; z-index: 1;
+  text-align: left;
+  padding: .55rem .8rem;
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(216,168,74,.18), transparent 60%),
+    rgba(0,0,0,.70);
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+.adm-table td{
+  padding: .45rem .8rem;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 2.1rem;
+}
+.adm-table tbody tr:hover{
+  background: rgba(255,255,255,.06);
+}
+
+/* colonnes compactes */
+.adm-table thead th:nth-child(1),
+.adm-table td:nth-child(1){ width: 9ch; }         /* ID */
+.adm-table thead th:nth-child(4),
+.adm-table td:nth-child(4){ width: 18ch; }        /* Actions */
+
+/* ===== Boutons d’action ===== */
+.actions{ display: flex; gap: .4rem; }
+.actions button,
+.footer-actions > button{
+  border: 1px solid rgba(216,168,74,.55);
+  background: rgba(0,0,0,.35);
+  color: #d8a84a;
+  border-radius: 10px;
+  padding: .3rem .6rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.actions button:hover,
+.footer-actions > button:hover{ filter: brightness(1.05); }
+
+.footer-actions{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: .6rem;
+}
+
+/* états */
+.error{ color:#ff6b6b; font-weight:700; text-align:center; }
+
+/* ===== Formulaires dans les modales ===== */
+.form-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .75rem;
+}
+.form-grid label{
+  display: grid; gap: .35rem; color: rgba(255,255,255,.9); font-weight: 700;
+}
+.form-grid input{
+  height: 40px;
+  padding: .5rem .7rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.45);
+  color: #fff;
+}
+.form-grid input:focus{
+  outline: none;
+  border-color: rgba(216,168,74,.65);
+  box-shadow: 0 0 0 3px rgba(216,168,74,.20);
+}
+@media (max-width: 700px){
+  .form-grid{ grid-template-columns: 1fr; }
+}
+
+/* ===== Scroll interne si bcp de lignes ===== */
+.adm-table{ max-height: 55vh; display: block; overflow: auto; }
+.adm-table thead, .adm-table tbody, .adm-table tr{ display: table; width: 100%; table-layout: fixed; }
